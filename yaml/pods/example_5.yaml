@@ -12,6 +12,7 @@ spec:
       image: nginx:1.21.1
       ports:
         - containerPort: 80
+
     - name : redis
       image: redis:latest
       ports:

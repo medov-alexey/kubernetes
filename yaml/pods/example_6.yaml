@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-tomcat
+  labels:
+     env: test
+     owner: alexey_medov
+     containers_count: "1" 
+spec:
+  containers:
+    - name : tomcat
+      image: tomcat:latest
+      ports:
+        - containerPort: 8080
