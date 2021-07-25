@@ -3,9 +3,9 @@ kind: Pod                              # Тип объекта Kubernetes кот
 metadata:                              # Начинается Блок перечисления дополнительной информации
   name: my-app                         # Задаем Имя объекта как My-App (то есть создаваемый нами Pod будет иметь такое имя)
   labels:
-     env: Test
-     owner: Alexey Medov
-     service_ype: WebService
+     env: test
+     owner: alexey_medov
+     service_ype: web_service
 spec:                                  # Начинается Блок спецификации объекта
   containers:                          # Говорим что будем описывать контейнеры
     - name : nginx                     # Задаем имя первого контейнера
