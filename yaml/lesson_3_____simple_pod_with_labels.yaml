@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  labels:
+    env: prod
+    app: main
+    tier: frontend
+    owner: AlexeyMedov
+spec:
+  containers:
+    - name : container-nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80

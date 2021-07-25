@@ -70,3 +70,11 @@ kubectl logs testpod
 Как пробросить локальный порт 9999 до 80 порта внутри контейнера пода "testpod"
 
 kubectl port-forward testpod 9999:80
+
+--
+
+Как запустить простой под из манифест файла
+
+kubectl apply -f 1_____first_manifest.yaml
+
+---
