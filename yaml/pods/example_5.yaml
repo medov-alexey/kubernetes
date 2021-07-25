@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app-5
+  labels:
+     env: test
+     owner: alexey_medov
+     containers_count: "2" 
+spec:
+  containers:
+    - name : nginx
+      image: nginx:1.21.1
+      ports:
+        - containerPort: 80
+    - name : redis
+      image: redis:latest
+      ports:
+        - containerPort: 6379
