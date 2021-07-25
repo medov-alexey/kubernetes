@@ -2,10 +2,10 @@ apiVersion: v1                         # Версия API Kuberntenes котор
 kind: Pod                              # Тип объекта Kubernetes который будет создаватся (в данном примере Pod)
 metadata:                              # Начинается Блок перечисления дополнительной информации
   name: my-app                         # Задаем Имя объекта как My-App (то есть создаваемый нами Pod будет иметь такое имя)
-  labels:
-     env: test
-     owner: alexey_medov
-     service_ype: web_service
+  labels:                              # Говорим что будем добавлять метки (лейблы)
+     env: test                         # Окружение равно тест
+     owner: alexey_medov               # Под запустил в кластере Alexey Medov
+     service_ype: web_server           # Тип сервиса = веб сервер 
 spec:                                  # Начинается Блок спецификации объекта
   containers:                          # Говорим что будем описывать контейнеры
     - name : nginx                     # Задаем имя первого контейнера
