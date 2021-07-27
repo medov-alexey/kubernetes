@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: my-backend-deployment
+    labels:
+       env: test
+       author: Alexey-Medov
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      appname: my-backend
+  template:
+    metadata: 
+      labels:
+        appname: my-backend
+    spec:
+      containers:
+        - name : nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+        - name : redis
+          image: redis:6.2.5
+          ports:
+            - containerPort: 6379
