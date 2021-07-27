@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-backend-deployment
+    name: my-backend-deployment      # Задаем имя деплоймента
     labels:
        env: test
        author: Alexey-Medov
 spec:
-  replicas: 5
+  replicas: 5                        # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
   selector:
     matchLabels:
-      appname: my-backend
+      appname: my-backend            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
   template:
     metadata: 
       labels:
-        appname: my-backend
+        appname: my-backend          # Задаем имя пода
     spec:
       containers:
-        - name : nginx
+        - name : nginx               # Задаем имя первого контейнера
           image: nginx:latest
           ports:
             - containerPort: 80
             - containerPort: 443
-        - name : redis
+        - name : redis               # Задаем имя второго контейнера
           image: redis:6.2.5
           ports:
             - containerPort: 6379
