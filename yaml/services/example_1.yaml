@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: my-backend-deployment      # Задаем имя деплоймента
+    labels:
+       env: test
+       author: Alexey-Medov
+spec:
+  replicas: 3                        # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: my-backend            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata: 
+      labels:
+        appname: my-backend          # Задаем имя пода
+    spec:
+      containers:
+        - name : my-backend          # Задаем имя первого контейнера
+          image: nginxdemos/hello:latest
+          ports:
+            - containerPort: 80
+
+---
+# Создаем контроллер автоматического контроля количества реплик пода
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-backend-autoscaling
+  labels:
+     app: my-backend-deployment
+spec: 
+  selector:
+    appname: my-backend              # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
+  ports: 
+    - name       : my-load-balancer
+      protocol   : TCP
+      port       : 80                # Внешний порт на баланесере, который будет смотреть в интернет
+      targetPort : 80                # Порт в Pod'e на который будет идти трафик
+  type: LoadBalancer
