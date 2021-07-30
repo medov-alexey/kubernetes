@@ -1,0 +1,22 @@
+---
+#
+# Просто создает Pod с HTTP Get проверкой (2xx,3xx) работоспособности 80 порта запущенного приложения Nginx  
+# Проверка запускается сразу после запуска пода с контейнером
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx
+  labels:
+     env: test
+spec:
+  containers:
+    - name : my-nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+          scheme: HTTP
