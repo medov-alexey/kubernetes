@@ -1,0 +1,20 @@
+# Пример создания простого DaemonSet который запустит по одному поду с Nginx на каждом доступном сервере.
+# Если в кластере появится еще сервера, то на каждом новом сервере поднимется под с Nginx.
+# Похож на ReplicaSet, но репликасет поды рандомно расскидывает по серверам, а DaemonSet разворачивает по одному поду на каждом сервере в кластере.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-first-daemon-set
+spec:
+  selector:
+    matchLabels:
+      proxyserver: nginx
+  template:
+    metadata:
+      labels:
+        proxyserver: nginx
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:latest

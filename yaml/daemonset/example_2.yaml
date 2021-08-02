@@ -1,0 +1,22 @@
+# Пример создания простого DaemonSet который запустит по одному поду с Nginx на каждом доступном сервере у которого есть label "ssd" со значением "false"
+# Если в кластере появится еще сервера, у которых указана метка "ssd" со значением "false", то на каждом таком новом сервере поднимется под с Nginx.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-first-daemon-set
+spec:
+  selector:
+    matchLabels:
+      proxyserver: nginx
+  template:
+    metadata:
+      labels:
+        proxyserver: nginx
+    spec:
+      nodeSelector:
+        ssd: "false"
+      containers:
+        - name: my-nginx
+          image: nginx:latest
+
