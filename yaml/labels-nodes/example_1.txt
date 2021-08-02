@@ -1,0 +1,3 @@
+# Присвоить ноде с именем NODE_NAME метку с именем key и значением value
+
+kubectl label node NODE_NAME key=value

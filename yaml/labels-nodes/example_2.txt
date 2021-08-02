@@ -1,0 +1,3 @@
+# Присвоить метку с именем "networkspeed" со значением "10Gb" ноде которая называется "server-3zx3"
+
+kubectl label node server-3zx3 networkspeed=10Gb
