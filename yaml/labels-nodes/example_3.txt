@@ -1,5 +1,5 @@
-# Присвоить две метки указанной ноде и перезаписать значение метки (owerwrite) если она уже существовала или имела другое значение.
+# Присвоить две метки указанной ноде и перезаписать (overwrite) значение меток, если они уже существовали или имели другие значения.
 
-kubectl label --overwrite node NODE_NAME disk=ssd,gpu=true
+kubectl label --overwrite node NODE_NAME disk=ssd gpu=true
 
 
