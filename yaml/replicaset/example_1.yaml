@@ -1,0 +1,19 @@
+# Пример создания простого ReplicaSet который запустит 3 пода с Nginx и будет следить за соблюдением их рабочего количества.
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-first-replica-set
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      webserver: nginx
+  template:
+    metadata:
+      labels:
+        webserver: nginx
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:latest

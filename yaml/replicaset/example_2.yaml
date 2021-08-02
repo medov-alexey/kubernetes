@@ -1,0 +1,28 @@
+# Пример создания ReplicaSet с использованием логического выражения (matchExpressions) и оператора "In" который запустит 3 пода с Nginx и будет следить за соблюдением их рабочего количества.
+# Бывают 4 оператора:
+# In, NotIn, Exists, and DoesNotExist
+# Про них лучше прочитать в интернете или на официальном сайте https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+#
+# Оператор In - значение указанного Label (в нашем случае webserver) должно совпадать с одним из указанных значений (в нашем случае одно из значение в списке это "nginx"). 
+#
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-first-replica-set
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: webserver
+        operator: In
+        values:
+          - nginx
+  template:
+    metadata:
+      labels:
+        webserver: nginx
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:latest
