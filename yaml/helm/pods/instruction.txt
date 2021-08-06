@@ -34,7 +34,7 @@ helm uninstall nginx
 
 
 
-Example 3:
+Example 2 version 2:
 
 helm install webserver ./example_2/ --set podname=webserver,container.image_name=tomcat,container.image_version=latest,container.port=8080
 
@@ -45,5 +45,19 @@ kubectl get pods -o wide
 kubectl describe pod webserver
 
 helm uninstall webserver
+
+
+
+Example 3:
+
+helm install trololo ./example_3/ --set container.image_name=httpd
+
+helm status trololo
+
+kubectl get pods -o wide
+
+kubectl describe pod trololo
+
+helm uninstall trololo
 
 #--------------------------------------------------------------------------------------------
