@@ -1,0 +1,15 @@
+#--------------------------------------------------------------------------------------------
+
+Instruction (ENG):
+helm install our_installation_name folder_name_with_chart_files
+
+Инструкция (RUS):
+helm install имя_которое_мы_хотим_задать_нашему_развертыванию путь_к_папке_с_файлами_чартов
+
+Example 1:
+helm install example1 ./example_1/
+
+Example 2:
+helm install Nginx ./example_2/
+
+#--------------------------------------------------------------------------------------------
