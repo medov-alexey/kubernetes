@@ -1,0 +1,49 @@
+#--------------------------------------------------------------------------------------------
+
+Instruction (ENG):
+helm install our_installation_name folder_name_with_chart_files
+
+Инструкция (RUS):
+helm install имя_которое_мы_хотим_задать_нашему_развертыванию путь_к_папке_с_файлами_чартов
+
+Example 1:
+
+helm install my-nginx ./example_1/
+
+helm status my-nginx
+
+kubectl get pods -o wide
+
+kubectl describe pods my-nginx
+
+helm uninstall my-nginx
+
+
+
+Example 2:
+
+helm install nginx ./example_2/
+
+helm status nginx
+
+kubectl get pods -o wide
+
+kubectl describe pod nginx
+
+helm uninstall nginx
+
+
+
+Example 3:
+
+helm install webserver ./example_2/ --set podname=webserver,container.image_name=tomcat,container.image_version=latest,container.port=8080
+
+helm status webserver
+
+kubectl get pods -o wide
+
+kubectl describe pod webserver
+
+helm uninstall webserver
+
+#--------------------------------------------------------------------------------------------
