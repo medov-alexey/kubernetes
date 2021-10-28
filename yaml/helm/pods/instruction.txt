@@ -60,4 +60,16 @@ kubectl describe pod trololo
 
 helm uninstall trololo
 
+
+Redis:
+
+helm install my-simple-redis ./redis/
+
+helm status my-simple-redis
+
+kubectl get pods -o wide
+
+kubectl describe pod my-simple-redis
+
+helm uninstall my-simple-redis
 #--------------------------------------------------------------------------------------------

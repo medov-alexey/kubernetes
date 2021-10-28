@@ -1,0 +1,7 @@
+podname: "my-simple-redis"
+
+container:
+  name: "my-simple-redis"
+  image_name: "redis"
+  image_version: "6.2.6"
+  port: "6379"
