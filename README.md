@@ -57,7 +57,11 @@ kubectl exec testpod date
 
 Как зайти в терминал внутри контейнера запущенного в поде "testpod"
 
-kubectl exec -it testpod sh
+В старой версии Kubernetes: kubectl exec -it testpod sh
+
+В новой версии Kubernetes: kubectl exec test -it -- bash
+
+В новой версии Kubernetes внутрь конкретного контейнера: kubectl exec test -с container123 -it -- bash
 
 ---
 
