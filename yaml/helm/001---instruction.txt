@@ -1,0 +1,36 @@
+# Развернуть релиз из чарта:
+
+helm install имя_релиза /путь/к-папке-с-файлами-чарта/
+
+Например:
+
+helm install my-release-name ./redis/
+
+
+# Посмотреть развернутые(т.е. запущенные) релизы
+
+helm list
+
+
+
+# Посмотреть манифест запущенного релиза
+
+helm get manifest my-release-name
+
+
+
+# Посмотреть историю обновлений резила
+
+helm history my-release-name
+
+
+
+# Обновить релиз с указанием новых значений некоторых переменных ( ./ - путь к папке с файлами чарта)
+
+helm upgrade my-release-name ./ --set podname=redis-v6,container.name=redis-v6,container.image_version=6.0
+
+
+
+# Проверить корректность файлов чарта
+
+helm lint /путь/к-папке-с-файлами-чарта/
