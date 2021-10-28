@@ -6,6 +6,8 @@ helm install our_installation_name folder_name_with_chart_files
 Инструкция (RUS):
 helm install имя_которое_мы_хотим_задать_нашему_развертыванию путь_к_папке_с_файлами_чартов
 
+#--------------------------------------------------------------------------------------------
+
 Example 1:
 
 helm install my-nginx ./example_1/
@@ -18,7 +20,7 @@ kubectl describe pods my-nginx
 
 helm uninstall my-nginx
 
-
+#--------------------------------------------------------------------------------------------
 
 Example 2:
 
@@ -32,7 +34,7 @@ kubectl describe pod nginx
 
 helm uninstall nginx
 
-
+#--------------------------------------------------------------------------------------------
 
 Example 2 version 2:
 
@@ -46,7 +48,7 @@ kubectl describe pod webserver
 
 helm uninstall webserver
 
-
+#--------------------------------------------------------------------------------------------
 
 Example 3:
 
@@ -60,6 +62,7 @@ kubectl describe pod trololo
 
 helm uninstall trololo
 
+#--------------------------------------------------------------------------------------------
 
 Redis:
 
@@ -72,4 +75,24 @@ kubectl get pods -o wide
 kubectl describe pod my-simple-redis
 
 helm uninstall my-simple-redis
+
+
+Как обновить запущенный релиз:
+
+
+helm upgrade имя-запущенного-релиза /путь/к-файлам-чарта/ --set переменная1=значениеXXX, переменная2=значениеYYY 
+
+Например:
+
+helm upgrade my-simple-redis        ./redis/              --set podname=mytestpod
+
+
+Если находитесь в папке с файлами чарта можно выполнить такую команду:
+
+helm upgrade my-simple-redis ./ --set podname=mytestpod
+
+
+
+Примечание: вместо пути к папке с файлами чарта, можно так же указать имя чарта доступный в репозитории, или полную URL ссылку к чарту.
+
 #--------------------------------------------------------------------------------------------
