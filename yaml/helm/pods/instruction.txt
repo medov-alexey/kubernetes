@@ -79,10 +79,10 @@ helm uninstall my-simple-redis
 
 Как обновить запущенный релиз:
 
-
 helm upgrade имя-запущенного-релиза /путь/к-файлам-чарта/ --set переменная1=значениеXXX, переменная2=значениеYYY 
 
-Например:
+
+Например изменим имя пода в релизе:
 
 helm upgrade my-simple-redis        ./redis/              --set podname=mytestpod
 
@@ -90,6 +90,12 @@ helm upgrade my-simple-redis        ./redis/              --set podname=mytestpo
 Если находитесь в папке с файлами чарта можно выполнить такую команду:
 
 helm upgrade my-simple-redis ./ --set podname=mytestpod
+
+
+
+Еще один пример, где тут мы через ключ "-f" указываем путь к файлу с новыми переменными которые хотим применить в релизе.
+
+helm upgrade my-simple-redis ./redis/ -f redis/new-values-file.yaml
 
 
 
