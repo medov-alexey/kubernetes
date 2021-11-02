@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{.Values.deployment.metadata.name}}               # Задаем имя деплоймента (из файла values)
+    labels:
+       env: {{.Values.deployment.metadata.labels.env}}
+       author: Alexey-Medov
+spec:
+  replicas: 1                                                # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: pod-example-1                                 # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata:
+      labels:
+        appname: pod-example-1                               # Задаем имя пода
+    spec:
+      containers:
+        - name : nginx                                       # Задаем имя первого контейнера
+          image: nginx:latest                                # Указываем образ для первого контейнера
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+        - name : redis                                       # Задаем имя второго контейнера
+          image: redis:6.2.6                                 # Указываем образ для второго контейнера
+          ports:
+            - containerPort: 6379

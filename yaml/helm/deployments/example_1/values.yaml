@@ -1,7 +1,5 @@
-podname: "my-super-pod"
-
-container:
-  name: "my-super-container"
-  image_name: "nginx"
-  image_version: "latest"
-  port: "80"
+deployment:
+    metadata:
+          name: deployment-example-1
+          labels:
+             env: test
