@@ -14,16 +14,16 @@ helm status example-1
 
 
 # Посмотреть список подов
-kubectl get pods -o wide
+kubectl get pods -o wide | grep example-1
 
 
 
 # Посмотреть подробную информацию по поду
-kubectl describe pod example-1
+kubectl describe deployments.apps example-1-deployment
 
 
 
 # Удалить релиз
-helm uninstall my-simple-redis
+helm uninstall example-1
 
 

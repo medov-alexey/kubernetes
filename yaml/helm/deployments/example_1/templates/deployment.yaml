@@ -9,11 +9,11 @@ spec:
   replicas: 1                                                # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
   selector:
     matchLabels:
-      appname: pod-example-1                                 # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+      appname: example-1-pod                                 # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
   template:
     metadata:
       labels:
-        appname: pod-example-1                               # Задаем имя пода
+        appname: example-1-pod                               # Задаем имя пода
     spec:
       containers:
         - name : nginx                                       # Задаем имя первого контейнера

@@ -1,5 +1,5 @@
 deployment:
     metadata:
-          name: deployment-example-1
+          name: example-1-deployment
           labels:
              env: test
