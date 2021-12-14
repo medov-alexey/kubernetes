@@ -34,3 +34,7 @@ helm upgrade my-release-name ./ --set podname=redis-v6,container.name=redis-v6,c
 # Проверить корректность файлов чарта
 
 helm lint /путь/к-папке-с-файлами-чарта/
+
+Например:
+
+helm lint deployments/redis/
