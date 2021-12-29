@@ -1,5 +1,7 @@
 deployment:
-    metadata:
-          name: example-1-deployment
-          labels:
-             env: test
+     metadata:
+           name: example-1-deployment
+           labels:
+                env: test
+     spec:
+         replicas: "2"

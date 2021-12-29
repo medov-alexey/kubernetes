@@ -6,7 +6,7 @@ metadata:
        env: {{.Values.deployment.metadata.labels.env}}
        author: Alexey-Medov
 spec:
-  replicas: 1                                                # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  replicas: {{.Values.deployment.spec.replicas}}             # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
   selector:
     matchLabels:
       appname: example-1-pod                                 # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
