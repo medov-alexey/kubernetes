@@ -1,7 +1,7 @@
-podname: "my-temp-musor-pod"
+podname: "my-simple-redis-trololo"
 
 container:
-  name: "my-temp-musor-container"
   image_name: "redis"
   image_version: "5.0.7"
   port: "6379"
+

@@ -12,6 +12,9 @@ helm install example-1 ./
 helm status example-1
 
 
+# Посмотреть список деплойментов
+kubectl get deployments.apps
+
 
 # Посмотреть список подов
 kubectl get pods -o wide | grep example-1
@@ -29,10 +32,17 @@ helm uninstall example-1
 
 #--- Для быстрой проверки работоспобоности в одну команду ---#
 
-helm install example-1 ./ ; sleep 3 ; \
-helm status example-1 ; sleep 3  ; \
-kubectl get pods -o wide | grep example-1 ; sleep 3  ; \
-kubectl describe deployments.apps example-1-deployment ; sleep 3  ; \
-helm uninstall example-1
+echo; helm install example-1 ./ ; sleep 3 ; echo; \
+helm status example-1 ; sleep 3 ; echo; \
+echo "Список развернутых деплойментов:"; echo; \
+kubectl get deployments.apps ; sleep 3 ; echo; \
+echo "Рассмотрим наш деплоймент по подробнее:"; echo; sleep 3; \
+kubectl describe deployments.apps example-1-deployment ; sleep 10 ; echo; \
+echo "В нашем деплойменте крутятся вот эти поды:"; echo; \
+kubectl get pods -o wide -l appname=example-1-pod ; sleep 3 ; echo; \
+echo "В каждом из этих подов данного деплоймента крутятся следующие контейнеры:"; sleep 3; echo; \
+echo "Containers Name: $(kubectl get deployments.apps -l env=test -o jsonpath='{.items[*].spec.template.spec.containers[*].name}')"; echo; sleep 3; \
+echo "Удаляем наш Helm релиз:"; echo; \
+helm uninstall example-1; echo
 
 #------------------------------------------------------------#
