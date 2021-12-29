@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        appname: example-1-pod                               # Задаем имя пода
+        appname: example-1-pod                               # Задаем уникальный label
     spec:
       containers:
         - name : nginx                                       # Задаем имя первого контейнера

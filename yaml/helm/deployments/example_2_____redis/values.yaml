@@ -1,7 +1,12 @@
-podname: "my-simple-redis"
+deployment:
+       metadata:
+           name: "redis-for-application-1"
+           labels:
+              env: "test"
+       spec:
+         replicas: "3"
 
 container:
-  name: "my-simple-redis"
   image_name: "redis"
-  image_version: "6.2.6"
+  image_version: "6.0"
   port: "6379"

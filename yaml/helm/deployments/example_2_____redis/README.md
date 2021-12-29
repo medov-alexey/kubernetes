@@ -9,12 +9,12 @@
 
 
 # Развернуть релиз
-helm install my-simple-redis ./
+helm install redis-for-application-1 ./
 
 
 
 # Посмотреть статус релиза
-helm status my-simple-redis
+helm status redis-for-application-1
 
 
 
@@ -24,35 +24,38 @@ kubectl get pods -o wide
 
 
 # Посмотреть подробную информацию по поду
-kubectl describe pod my-simple-redis
+kubectl describe pod redis-for-application-1
 
 
 
 # Обновляем релиз. 
 # Тут мы через ключ "-f" указываем путь к файлу с новыми переменными которые хотим применить в релизе.
-helm upgrade my-simple-redis ./ -f ./new-values-file.yaml
+helm upgrade redis-for-application-1 ./ -f ./new-values-file.yaml
 
 
 
 # Удалить релиз
-helm uninstall my-simple-redis
+helm uninstall redis-for-application-1
 
 
 
 #--- Для быстрой проверки работоспобоности в одну команду ---#
 
-echo; helm install my-simple-redis ./ ; sleep 3 ; echo; \
-helm status my-simple-redis ; sleep 3 ; echo; sleep 3; \
-echo "----- До обновления Helm релиза: -----"; echo; sleep 3; \
+echo; helm install redis-for-application-1 ./ ; sleep 3 ; echo; \
+helm status redis-for-application-1 ; sleep 3 ; echo; sleep 3; \
+echo "Список развернутых деплойментов:"; echo; \
+kubectl get deployments.apps ; sleep 3 ; echo; \
+echo "Рассмотрим наш деплоймент по подробнее:"; echo; sleep 3; \
+kubectl describe deployments.apps redis-for-application-1 ; sleep 10 ; echo; \
+echo "----- Поды до обновления Helm релиза: -----"; echo; sleep 3; \
 kubectl get pods -o wide ; sleep 3 ; echo; \
-echo "Container Name: $(kubectl get pods my-simple-redis -o jsonpath='{.spec.containers[*].name}')"; echo; \
-kubectl describe pod my-simple-redis | grep Image; sleep 3 ; echo ; \
-helm upgrade my-simple-redis ./ -f ./new-values-file.yaml ; sleep 3 ; echo; echo; echo; \
-echo "----- После обновления Helm релиза: -----"; echo; sleep 3; \
+kubectl describe pod -l appname=redis-for-application-1 | grep Image; sleep 3 ; echo ; \
+helm upgrade redis-for-application-1 ./ -f ./new-values-file.yaml ; sleep 10 ; echo; echo; echo; \
+echo "----- Поды после обновления Helm релиза: -----"; echo; sleep 3; \
 kubectl get pods -o wide ; sleep 3 ; echo; \
-echo "Container Name: $(kubectl get pods my-simple-redis-trololo -o jsonpath='{.spec.containers[*].name}')"; echo; \
-kubectl describe pod my-simple-redis-trololo | grep Image; sleep 3 ; echo ""; \
-echo "Обрати внимание: Я изменил имя пода, имя контейнера, образ и версию образа"; echo; sleep 3; \
-helm uninstall my-simple-redis; echo
+echo "Containers Name: $(kubectl get deployments.apps -l env=test,apptype=cache -o jsonpath='{.items[*].spec.template.spec.containers[*].name}')"; sleep 3; \
+kubectl describe pod -l appname=redis-for-application-1 | grep Image; sleep 3 ; echo ""; \
+echo "Обратите внимание: Я изменил версию образа контейнера использующийся в подах"; echo; sleep 3; \
+helm uninstall redis-for-application-1; echo
 
 #------------------------------------------------------------#

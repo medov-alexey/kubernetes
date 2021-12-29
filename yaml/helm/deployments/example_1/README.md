@@ -16,8 +16,8 @@ helm status example-1
 kubectl get deployments.apps
 
 
-# Посмотреть список подов
-kubectl get pods -o wide | grep example-1
+# Посмотреть список подов нашего деплоймента (ищет по label)
+kubectl get pods -l appname=example-1-pod
 
 
 

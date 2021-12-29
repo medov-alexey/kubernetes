@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{.Values.deployment.metadata.name}}                                           # Задаем имя деплоймента (из файла values)
+    labels:
+       env: {{.Values.deployment.metadata.labels.env}}
+       author: Alexey-Medov
+       importance: high
+       apptype: cache
+spec:
+  replicas: {{.Values.deployment.spec.replicas}}                                         # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: redis-for-application-1                                                   # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label с таким же значением.
+  template:
+    metadata:
+      labels:
+        appname: redis-for-application-1                                                 # Задаем уникальный label нашего пода(ов)
+    spec:
+      containers:
+        - name : redis                                                                   # Задаем имя контейнера
+          image: {{.Values.container.image_name}}:{{.Values.container.image_version}}    # Указываем образ для контейнера
+          ports:
+            - containerPort: {{.Values.container.port}}
