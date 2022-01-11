@@ -1,0 +1,3 @@
+apiVersion: v2                                         # Helm API Version
+name: example-3                                        # Helm Chart Name
+version: 1.0.0                                         # Chart version

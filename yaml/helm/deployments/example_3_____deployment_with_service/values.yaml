@@ -1,0 +1,7 @@
+deployment:
+     metadata:
+           name: example-3-deployment
+           labels:
+                env: test
+     spec:
+         replicas: "2"

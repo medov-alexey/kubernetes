@@ -1,3 +1,6 @@
+---
+# Создаем деплоймент
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +25,7 @@ spec:
             - containerPort: 80
 
 ---
-# Создаем контроллер автоматического контроля количества реплик пода
+# Далее создаем сервис для нашего деплоймента
 
 apiVersion: v1
 kind: Service
