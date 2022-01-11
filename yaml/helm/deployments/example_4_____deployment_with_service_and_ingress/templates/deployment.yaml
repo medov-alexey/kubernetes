@@ -1,0 +1,61 @@
+# Создаем деплоймент
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{.Values.deployment.metadata.name}}               # Задаем имя деплоймента (из файла values)
+    labels:
+       env: {{.Values.deployment.metadata.labels.env}}
+       author: Alexey-Medov
+spec:
+  replicas: {{.Values.deployment.spec.replicas}}             # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: example-4-pod                                 # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata:
+      labels:
+        appname: example-4-pod                               # Задаем уникальный label
+    spec:
+      containers:
+        - name : nginx                                       # Задаем имя контейнера
+          image: nginx:latest                                # Указываем образ для запуска контейнера
+          ports:
+            - containerPort: 80
+
+# Создаем Service с простым типом Cluster-IP для нашего деплоймента
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-for-example-4
+  labels:
+     author: Alexey-Medov
+spec:
+  type: ClusterIP
+  selector:
+    appname: example-4-pod           # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
+  ports:
+    - protocol   : TCP
+      port       : 8080              # Порт внутри-кластерного IP данного сервиса 
+      targetPort : 80                # Порт контейнера с микросервисом внутри пода (для nginx сервера например, это 80)
+
+# Создаем Ingress который будет запросы маршрутизировать на наш Service
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-for-example-4
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: example4.testsite.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service-for-example-4
+            port:
+              number: 80
