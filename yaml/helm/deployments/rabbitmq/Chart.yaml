@@ -1,0 +1,3 @@
+apiVersion: v2                                         # Helm API Version
+name: rabbitmq                                         # Helm Chart Name
+version: 3.9                                           # Chart version

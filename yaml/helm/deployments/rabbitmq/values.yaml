@@ -1,0 +1,7 @@
+deployment:
+     metadata:
+           name: rabbitmq
+           labels:
+                env: test
+     spec:
+         replicas: "1"
