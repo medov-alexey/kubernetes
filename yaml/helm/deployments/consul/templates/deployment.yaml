@@ -1,0 +1,26 @@
+# Создаем деплоймент
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{.Values.deployment.metadata.name}}             # Задаем имя деплоймента (из файла values)
+    labels:
+       env: {{.Values.deployment.metadata.labels.env}}
+       author: Alexey-Medov
+spec:
+  replicas: {{.Values.deployment.spec.replicas}}           # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: consul                                      # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata:
+      labels:
+        appname: consul                                    # Задаем уникальный label
+    spec:
+      containers:
+        - name : consul                                    # Задаем имя контейнера
+          image: consul:1.11                               # Указываем образ для запуска контейнера
+          ports:
+            - containerPort: 8300
+            - containerPort: 8500
+

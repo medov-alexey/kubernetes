@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx                                            # Задаем имя деплоймента
+    labels:
+       env: test
+       author: Alexey-Medov
+spec:
+  replicas: 1                                              # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: nginx                                       # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata:
+      labels:
+        appname: nginx                                     # Задаем уникальный label
+    spec:
+      containers:
+        - name : nginx                                     # Задаем имя контейнера
+          image: nginx:latest                              # Указываем образ для запуска контейнера
+          ports:
+            - containerPort: 80
+          env:
+          - name: size                                     # Внутри контейнера будет создана переменная size
+            valueFrom:                                     # Откуда брать информацию
+              configMapKeyRef:                             # Говорим что будем брать из ConfigMap'a 
+                name: my-test-configmap                    # который имеет такое имя
+                key: size                                  # возьмем значение переменной size из ConfigMap'a и запишем ее в переменную size внутри контейнера

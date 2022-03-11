@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-test-configmap
+data:
+  size: 512MB  
+  

@@ -1,0 +1,7 @@
+deployment:
+     metadata:
+           name: consul
+           labels:
+                env: test
+     spec:
+         replicas: "1"
