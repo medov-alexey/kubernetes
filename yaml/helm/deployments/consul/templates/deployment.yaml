@@ -37,6 +37,6 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: consul
-                  key: config
+                  key: config.json
           command: ["/bin/sh"]
-          args: ["-ec", "consul agent -server -bootstrap-expect=1 -data-dir=/consul/data"]
+          args: ["-c", "echo $CONSUL_LOCAL_CONFIG > /consul/config/config.json; consul agent -server -bootstrap-expect=1 -data-dir=/consul/data -config-dir=/consul/config"]
