@@ -1,4 +1,3 @@
-# Создаем Service с простым типом Cluster-IP для нашего деплоймента
 ---
 apiVersion: v1
 kind: Service
@@ -9,12 +8,12 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    appname: consul                   # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
+    appname: consul
   ports:
     - name       : rpc-server
       protocol   : TCP
-      port       : 8300               # Порт внутри-кластерного IP данного сервиса 
-      targetPort : 8300               # Порт контейнера с микросервисом внутри пода (для nginx сервера например, это 80)
+      port       : 8300 
+      targetPort : 8300
     - name       : http-api
       protocol   : TCP
       port       : 8500

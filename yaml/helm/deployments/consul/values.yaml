@@ -1,7 +1,13 @@
 deployment:
-     metadata:
-           name: consul
-           labels:
-                env: test
-     spec:
-         replicas: "1"
+  metadata:
+    name: consul
+    labels:
+      env: test
+  spec:
+    replicas: "1"
+    podLabel: consul
+    container:
+      name: consul
+      image:
+        name: consul
+        version: 1.11

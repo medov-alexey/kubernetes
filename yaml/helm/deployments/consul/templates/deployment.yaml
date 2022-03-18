@@ -1,26 +1,42 @@
-# Создаем деплоймент
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: {{.Values.deployment.metadata.name}}             # Задаем имя деплоймента (из файла values)
+    name: {{.Values.deployment.metadata.name}}
     labels:
        env: {{.Values.deployment.metadata.labels.env}}
        author: Alexey-Medov
 spec:
-  replicas: {{.Values.deployment.spec.replicas}}           # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  replicas: {{.Values.deployment.spec.replicas}}
   selector:
     matchLabels:
-      appname: consul                                      # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+      appname: {{.Values.deployment.spec.podLabel}}
   template:
     metadata:
       labels:
-        appname: consul                                    # Задаем уникальный label
+        appname: {{.Values.deployment.spec.podLabel}}
     spec:
       containers:
-        - name : consul                                    # Задаем имя контейнера
-          image: consul:1.11                               # Указываем образ для запуска контейнера
+        - name : {{.Values.deployment.spec.container.name}}
+          image: {{.Values.deployment.spec.container.image.name}}:{{.Values.deployment.spec.container.image.version}}
           ports:
             - containerPort: 8300
             - containerPort: 8500
-
+          env:
+            - name: CONSUL_HTTP_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  name: consul
+                  key: addr
+            - name: CONSUL_HTTP_TOKEN
+              valueFrom:
+                configMapKeyRef:
+                  name: consul
+                  key: token 
+            - name: CONSUL_LOCAL_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: consul
+                  key: config
+          command: ["/bin/sh"]
+          args: ["-ec", "consul agent -server -bootstrap-expect=1 -data-dir=/consul/data"]
