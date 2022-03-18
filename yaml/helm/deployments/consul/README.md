@@ -1,7 +1,5 @@
 ###################################################################
-# Это мой первый чарт который разворачивает deployment,
-# c двумя репликами пода, в которых разворачиваются два контейнера,
-# которые логически между собой не связаны.
+# Этот чарт разворачивает одиночный инстанс Consul в Kubernetes
 ###################################################################
 
 # Развернуть релиз
@@ -30,7 +28,7 @@ kubectl describe deployments.apps consul
 helm uninstall consul
 
 
-#--- Для быстрой проверки работоспобоности в одну команду ---#
+# Для быстрой проверки работоспобоности в одну команду
 
 echo; helm install consul ./ ; sleep 3 ; echo; \
 helm status consul ; sleep 3 ; echo; \
@@ -44,5 +42,3 @@ echo "В каждом из этих подов данного деплоймен
 echo "Containers Name: $(kubectl get deployments.apps -l env=test -o jsonpath='{.items[*].spec.template.spec.containers[*].name}')"; echo; sleep 3; \
 echo "Удаляем наш Helm релиз:"; echo; \
 helm uninstall consul; echo
-
-#------------------------------------------------------------#
