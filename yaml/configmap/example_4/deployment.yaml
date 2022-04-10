@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx                                            # Задаем имя деплоймента
+    labels:
+       env: test
+       author: Alexey-Medov
+spec:
+  replicas: 1                                              # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
+  selector:
+    matchLabels:
+      appname: nginx                                       # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+  template:
+    metadata:
+      labels:
+        appname: nginx                                     # Задаем уникальный label
+    spec:
+      containers:
+        - name : nginx                                     # Задаем имя контейнера
+          image: nginx:latest                              # Указываем образ для запуска контейнера
+          ports:
+            - containerPort: 80
+          volumeMounts:                                    # Перечисляем тома которые хотим подключить к данному контейнеру
+          - name: configfile-volume                        # Указываем имя конкретного тома из списка доступных томов для этого пода
+            mountPath: /etc/nginx/nginx.conf               # Говорим что будем монтировать в конкретный файл, а не в каталог
+            subPath: nginx.conf                            # вместо монтирования всего тома целиком, монтирируем только файл nginx.conf (должно совпадать со значением items.path из раздела volumes)
+      volumes:                                             # Объявляем доступные для данного пода тома
+        - name: configfile-volume
+          configMap:                                       # Говорим что будет брать файл из конфигмапа
+            name: nginx-config                             # у которого имя такое
+            items:
+            - key: nginx.conf                              # Из конфигмапа возьмем значение ключа с таким именем
+              path: nginx.conf                             # указываем имя файла, под этим именем оно будет положено в контейнер (должно совпадать со значением subPath)
