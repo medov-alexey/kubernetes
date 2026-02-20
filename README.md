@@ -25,7 +25,9 @@
 9) minikube config set driver kvm2
 10) sudo shutdown -r now
 
-Запуск Kubernetes кластера Minikube выполняется одной командой: minikube start 
+Запуск Kubernetes кластера Minikube выполняется одной командой: 
+
+minikube start 
 
 ---
 
