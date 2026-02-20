@@ -1,9 +1,9 @@
 Как установить утилиту Kubectl
 
-1) curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.2/bin/linux/amd64/kubectl
+1) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 2) chmod +x ./kubectl
-3) sudo cp ./kubectl /usr/local/bin/kubectl
-4) sudo cp ./kubectl /usr/bin/kubectl
+3) sudo cp -rf ./kubectl /usr/local/bin/kubectl
+4) sudo cp -rf ./kubectl /usr/bin/kubectl
 
 ---
 
