@@ -58,10 +58,14 @@ kubectl get pods
 Как запустить самый простой под с именем "testpod" с Nginx контейнером на борту
 
 Для старых версий Kubernetes (до 1.18): 
-````kubectl run testpod --generator=run-pod/v1 --image=nginx:alpine --port=80```
+```bash
+kubectl run testpod --generator=run-pod/v1 --image=nginx:alpine --port=80
+```
 
 Для новых версий Kubernetes (начиная с 1.18): 
-```kubectl run testpod --image=nginx:alpine --port=80```
+```bash
+kubectl run testpod --image=nginx:alpine --port=80
+```
 
 ---
 
