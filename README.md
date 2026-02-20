@@ -66,13 +66,12 @@ kubectl get pods
 
 Как запустить самый простой под с именем "testpod" с Nginx контейнером на борту
 
-Для старых версий Kubernetes (до 1.18): 
+ 
 ```bash
+# Для старых версий Kubernetes (до 1.18):
 kubectl run testpod --generator=run-pod/v1 --image=nginx:alpine --port=80
-```
 
-Для новых версий Kubernetes (начиная с 1.18): 
-```bash
+# Для новых версий Kubernetes (начиная с 1.18): 
 kubectl run testpod --image=nginx:alpine --port=80
 ```
 
@@ -91,23 +90,25 @@ kubectl describe pods testpod
 
 Как запустить команду внутри контейнера запущенного в поде "testpod"
 ```bash
+# Для старых версий Kubernetes:
 kubectl exec testpod date
+
+# Для новых версий Kubernetes:
+kubectl exec testpod -- date
 ```
 
 Как зайти в терминал внутри контейнера запущенного в поде "testpod"
 
-В старой версии Kubernetes: 
+
 ```bash
+# В старой версии Kubernetes: 
 kubectl exec -it testpod sh
-```
 
-В новой версии Kubernetes: 
-```bash
+
+# В новой версии Kubernetes: 
 kubectl exec test -it -- bash
-```
 
-В новой версии Kubernetes внутрь конкретного контейнера: 
-```bash
+# В новой версии Kubernetes, внутрь конкретного контейнера: 
 kubectl exec test -с container123 -it -- bash
 ```
 
