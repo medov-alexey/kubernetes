@@ -106,10 +106,10 @@ kubectl exec -it testpod sh
 
 
 # В новой версии Kubernetes: 
-kubectl exec test -it -- bash
+kubectl exec test -it -- sh
 
 # В новой версии Kubernetes, внутрь конкретного контейнера: 
-kubectl exec test -с container123 -it -- bash
+kubectl exec test -с container123 -it -- sh
 ```
 
 <br>
