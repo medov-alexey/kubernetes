@@ -1,9 +1,31 @@
 Как установить утилиту Kubectl
 
-1) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-2) chmod +x ./kubectl
-3) sudo cp -rf ./kubectl /usr/local/bin/kubectl
-4) sudo cp -rf ./kubectl /usr/bin/kubectl
+1) cd /tmp
+2) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+3) chmod +x ./kubectl
+4) sudo cp -rf ./kubectl /usr/local/bin/kubectl
+5) sudo cp -rf ./kubectl /usr/bin/kubectl
+
+---
+
+Как установить minikube и компоненты для его работы (проверял на Ubuntu 24.04):
+
+Команды нужно запускать из под обычного пользователя (не root)
+
+1) cd /tmp
+2) sudo apt update
+3) sudo apt install cpu-checker qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager -y
+4) sudo systemctl enable --now libvirtd
+5) sudo usermod -aG libvirt $USER
+5) sudo usermod -aG kvm $USER
+5) curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
+6) sudo install minikube /usr/local/bin/
+7) minikube version
+8) echo 'source <(minikube completion bash)' >> ~/.bashrc
+9) minikube config set driver kvm2
+10) sudo shutdown -r now
+
+Запуск Kubernetes кластера Minikube выполняется одной командой: minikube start 
 
 ---
 
