@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-backend-deployment      # Задаем имя деплоймента
+    name: my-third-backend-deployment      # Задаем имя деплоймента
     labels:
        env: test
        author: Alexey-Medov
@@ -29,23 +29,27 @@ spec:
 ---
 # Создаем контроллер автоматического контроля количества реплик пода
 
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: my-backend-autoscaling
 spec: 
   scaleTargetRef:                          # Перечисляем информацию о том, каким деплойментом будет управлять сервис автоматического горизонтального масштабирования
-    apiVersion: apps/v2beta1v1
+    apiVersion: apps/v1
     kind: Deployment
-    name: my-backend-deployment
+    name: my-third-backend-deployment
   minReplicas: 2                           # Минимальное количество реплик которое будет всегда работать
   maxReplicas: 5                           # Максимально допустимое количество реплик в случае наступления правила масшабирования
   metrics:
     - type: Resource
       resource:
-          name: cpu
-          targetAverageUtilization: 80     # Увеличиваем количество подов если нагрузка на CPU всех текущих подов превышает 80%
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80          # Увеличиваем количество подов если нагрузка на CPU всех текущих подов превышает 80%
     - type: Resource
       resource:
-          name: memory
-          targetAverageUtilization: 85     # Увеличиваем количество подов если нагрузка на оперативную память всех текущих подов превышает 85%
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 85          # Увеличиваем количество подов если нагрузка на оперативную память всех текущих подов превышает 85%
