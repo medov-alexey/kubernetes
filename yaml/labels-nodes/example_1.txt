@@ -1,3 +1,9 @@
 # Присвоить ноде с именем NODE_NAME метку с именем key и значением value
 
 kubectl label node NODE_NAME key=value
+
+
+
+# Например, если нода называется Minikube, команда будет такая:
+
+kubectl label node minikube key=value

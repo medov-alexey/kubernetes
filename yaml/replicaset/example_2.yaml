@@ -9,7 +9,7 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: my-first-replica-set
+  name: my-second-replica-set
 spec:
   replicas: 3
   selector:
@@ -17,11 +17,11 @@ spec:
       - key: webserver
         operator: In
         values:
-          - nginx
+          - nginx456
   template:
     metadata:
       labels:
-        webserver: nginx
+        webserver: nginx456
     spec:
       containers:
         - name: my-nginx

@@ -5,7 +5,7 @@ kind: ReplicaSet
 metadata:
   name: my-first-replica-set
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       webserver: nginx

@@ -3,3 +3,7 @@
 kubectl label --overwrite node NODE_NAME disk=ssd gpu=true
 
 
+
+# Например, если нода называется Minikube, команда будет такая:
+
+kubectl label --overwrite node minikube disk=ssd gpu=true
