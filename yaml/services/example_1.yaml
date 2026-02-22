@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-backend-deployment      # Задаем имя деплоймента
+    name: my-backend-1-deployment      # Задаем имя деплоймента
     labels:
        env: test
        author: Alexey-Medov
@@ -12,11 +12,11 @@ spec:
   replicas: 3                        # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
   selector:
     matchLabels:
-      appname: my-backend            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+      appname: my-backend-1            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
   template:
     metadata: 
       labels:
-        appname: my-backend          # Задаем имя пода
+        appname: my-backend-1          # Задаем имя пода
     spec:
       containers:
         - name : my-backend          # Задаем имя первого контейнера
@@ -30,15 +30,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-backend-autoscaling
+  name: my-backend-1-service
   labels:
-     app: my-backend-deployment
+     app: my-backend-1-deployment
 spec: 
   selector:
-    appname: my-backend              # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
+    appname: my-backend-1              # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
   ports: 
-    - name       : my-load-balancer
+    - name       : nginx
       protocol   : TCP
-      port       : 80                # Внешний порт на баланесере, который будет смотреть в интернет
+      port       : 80                # порт на балансере
       targetPort : 80                # Порт в Pod'e на который будет идти трафик
   type: LoadBalancer

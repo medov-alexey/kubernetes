@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: my-backend-deployment      # Задаем имя деплоймента
+    name: my-backend-2-deployment      # Задаем имя деплоймента
     labels:
        env: test
        author: Alexey-Medov
@@ -9,11 +9,11 @@ spec:
   replicas: 3                        # Задаем количество реплик пода. То есть сколько экзепляров данного пода должно быть создано.
   selector:
     matchLabels:
-      appname: my-backend            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
+      appname: my-backend-2            # Говорим что деплоймент будет связан с теми подами, у которых указан такой же Label.
   template:
     metadata: 
       labels:
-        appname: my-backend          # Задаем имя пода
+        appname: my-backend-2          # Задаем имя пода
     spec:
       containers:
         - name : my-backend          # Задаем имя первого контейнера
@@ -30,20 +30,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-backend-autoscaling       # Задаем имя сервиса
+  name: my-backend-2-service       # Задаем имя сервиса
   labels:
-     app: my-backend-deployment
+     app: my-backend-2-deployment
 spec: 
   type: LoadBalancer
   selector:
-    appname: my-backend              # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
+    appname: my-backend-2              # Говорим что будем отправлять трафик на Pod'ы у которых есть данная метка (label)
   ports: 
-    - name       : my-backend
+    - name       : nginx
       protocol   : TCP
-      port       : 80                # Первый Внешний порт на баланесере, который будет смотреть в интернет
+      port       : 80                # Первый порт на балансере
       targetPort : 80                # Порт в Pod'e на который будет идти трафик
-    - name       : my-tomcat
+    - name       : tomcat
       protocol   : TCP
-      port       : 8080              # Второй внешний порт на баланесере, который будет смотреть в интернет
+      port       : 8080              # Второй порт на балансере
       targetPort : 8080              # Порт в Pod'e на который будет идти трафик
 
