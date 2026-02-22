@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: my-first-daemon-set
+  name: my-second-daemon-set
 spec:
   selector:
     matchLabels:
