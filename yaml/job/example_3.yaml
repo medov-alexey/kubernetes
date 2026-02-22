@@ -6,16 +6,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: my-first-job-resourse
+  name: my-third-job-resourse
 spec:
-  completions: 10                                 # Сколько раз подряд должен запустится под с указанным контейнером и успешно завершится
-  parallelism: 3                                  # Сколько подов паралельно будет разрешено выполнять за раз
+  completions: 10                         # Сколько раз подряд должен запустится под с указанным контейнером и успешно завершится
+  parallelism: 3                          # Сколько подов паралельно будет разрешено выполнять за раз
   template:
     metadata:
       labels:
         type: test
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: OnFailure            # если контейнер завершится с ошибкой, Kubernetes перезапустит контейнер внутри того же пода.
       containers:
         - name: sleep1min
           image: medoff/sleep1min:latest

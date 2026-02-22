@@ -7,7 +7,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: my-first-job-resourse
+  name: my-fourth-job-resourse
 spec:
   activeDeadlineSeconds: 30                      # Время в секундах прошедших с момента запуска пода, которое дается для выполнения приложения внутри контейнера.
   completions: 2                                 # Сколько раз подряд должен запустится под с указанным контейнером и успешно завершится
@@ -17,7 +17,7 @@ spec:
       labels:
         type: test
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: OnFailure                   # если контейнер завершится с ошибкой, Kubernetes перезапустит контейнер внутри того же пода.
       containers:
         - name: sleep1min
           image: medoff/sleep1min:latest
